@@ -1,0 +1,33 @@
+import keras
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+import uproot3 as ROOT
+import awkward as aw
+from root_numpy import root2array, rec2array, array2root, tree2array
+
+
+DataSet = pd.read_csv("signal3.csv",index_col=False)
+DataSet_ = pd.read_csv("background3.csv",index_col=False)
+
+regression_mass  = DataSet['regression_mass'].to_numpy(dtype='float32')
+boson_mass  = DataSet['boson_mass'].to_numpy(dtype='float32')
+
+regression_mass_  = DataSet_['regression_mass'].to_numpy(dtype='float32')
+boson_mass_  = DataSet_['boson_mass'].to_numpy(dtype='float32')
+
+
+print(regression_mass.std())
+
+filename =  "3tev.root"
+branch1 = np.array(regression_mass,dtype=[("regression_mass",'float32')])
+branch2 = np.array(boson_mass,dtype=[("boson_mass",'float32')])
+branch3 = np.array(regression_mass_,dtype=[("regression_mass_back",'float32')])
+branch4 = np.array(boson_mass_,dtype=[("boson_mass_back",'float32')])
+
+array2root(branch1,filename,'tree',mode='recreate')
+array2root(branch2,filename,'tree',mode='update')
+array2root(branch3,filename,'tree',mode='update')
+array2root(branch4,filename,'tree',mode='update')
