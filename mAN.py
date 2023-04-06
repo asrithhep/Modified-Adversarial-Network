@@ -20,8 +20,8 @@ from sklearn.utils import shuffle
 
 
 
-from dnngan import GANregression
-from dnngan import LoadedGANregression
+from dnnmAN import GANregression
+from dnnmAN import LoadedGANregression
 
 
 
@@ -36,7 +36,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("-tr","--train",help="to train the model",action="store_true")
 parser.add_argument("-ts","--test",help="to test the model",action="store_true")
-parser.add_argument("-b","--back",help="to test the model",action="store_true")
+parser.add_argument("-b","--back",help="background boolean")
 args = parser.parse_args()
     
 
